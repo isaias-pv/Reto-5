@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<h1>MisiónTIC 2022</h1>
+
+<div class="container unauthenticated">
+    <a href="/oauth2/authorization/github">Presione aqui</a> para iniciar sesion</div>
+
+<div class="container authenticated" style="display:none">
+    Usuario: <span id="user"></span>
+    
+    <ul>
+            <li><a href="category.html">Ir a Categorias</a></li>
+            <li><a href="cloud.html">Ir a Nubes</a></li>
+            <li><a href="client.html">Ir a Clientes</a></li>
+            <li><a href="message.html">Ir a Mensajes</a></li>
+            <li><a href="reservation.html">Ir a Reservaciones</a></li>
+        </ul>
+    <!--
+    <ol>
+        <li> <a href="http://129.151.111.172:8080/frontend/menu.html"> Options </a> </li>
+    </ol>-->
+
+</div>
+
+</body>
+<script type="text/javascript">
+    $.get("/user", function (data) {
+    $("#user").html(data.name);
+    $(".unauthenticated").hide()
+    $(".authenticated").show()
+  });
+</script>
+</html>
