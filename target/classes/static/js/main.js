@@ -17,7 +17,7 @@ function logout(){
         url: "/logout",
         type: "POST",
         success: () =>{
-            location.href = "http://localhost/";
+            location.href = "/";
         }
     });
     return true;        
