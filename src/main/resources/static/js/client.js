@@ -31,20 +31,20 @@ function getClients(){
 }
 
 function loadClients(items){
-    let myTable = document.getElementsByTagName("laodClients")
-
-    for(let i = 0; i < items.length; i++){
-
-        myTable+=`<tr data-id='${items[i].idClient}'>`;
-        myTable+="<td>"+items[i].name+"</td>";
-        myTable+="<td>"+items[i].email+"</td>";
-        myTable+="<td>"+items[i].age+"</td>"; 
-        myTable+="<td><button id='editClient'>Editar</button></td>";
-        myTable+="</tr>";
+    if(items.length != 0){
+        let myTable = document.getElementsByTagName("laodClients")
+        for(let i = 0; i < items.length; i++){    
+            myTable+=`<tr data-id='${items[i].idClient}'>`;
+            myTable+="<td>"+items[i].name+"</td>";
+            myTable+="<td>"+items[i].email+"</td>";
+            myTable+="<td>"+items[i].age+"</td>"; 
+            myTable+='<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="editClient">Editar</button></td>';
+            myTable+="</tr>";
+            }
+        myTable+="</tbody>";
+        $("#loadClients").empty()
+        $("#loadClients").append(myTable);
     }
-    myTable+="</tbody>";
-    $("#loadClients").empty()
-    $("#loadClients").append(myTable);
 }
 
 function putClient(){
@@ -52,23 +52,16 @@ function putClient(){
         url :  URL_CLIENT + "update",
         type:   "PUT",
         data:   JSON.stringify({
-            idClient: document.getElementById("putClient").dataset.id, 
-            name: $("#name").val(),
-            email: $("#email").val(),
-            age: $("#age").val(),
-            password: $("#password").val(),
+            idClient: $("#editIdClient").val(), 
+            name: $("#editName").val(),
+            email: $("#editEmail").val(),
+            age: $("#editAge").val(),
+            password: $("#editPassword").val(),
         }),
         contentType:"application/JSON",
         success:() => {
             alert("Cliente actualizado")
-            getClients()
-            document.getElementById("putClient").disabled = true
-            document.getElementById("postClient").disabled = false
-            document.getElementById("email").disabled = false
-            $("#name").val("")
-            $("#email").val("")
-            $("#age").val("")
-            $("#password").val("")
+            getClients()            
         }
     });   
 }
@@ -96,14 +89,11 @@ function editClient(id){
         type:   "GET",
         datatype:   "JSON",
         success:(response) => {
-            $("#name").val(response.name)
-            $("#email").val(response.email)
-            $("#age").val(response.age)
-            $("#password").val(response.password)
-            document.getElementById("email").disabled = true
-            document.getElementById("postClient").disabled = true
-            document.getElementById("putClient").disabled = false
-            document.getElementById("putClient").dataset.id = id
+            $("#editIdClient").val(response.idClient)
+            $("#editName").val(response.name)
+            $("#editEmail").val(response.email)
+            $("#editAge").val(response.age)
+            $("#editPassword").val(response.password)
         }
     });
 }

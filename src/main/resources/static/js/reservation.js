@@ -5,8 +5,8 @@ function postReservation(){
         url :  URL_RESERVATION + "save",
         type:   "POST",
         data:   JSON.stringify({
-            startDate: document.getElementById("startDate").value,
-            devolutionDate: document.getElementById("finishDate").value,
+            startDate: $("#startDate").val(),
+            devolutionDate: $("#finishDate").val(),
             cloud: {id: $("#idCloud").val()},
             client: {idClient: $("#idClient").val()}
         }),
@@ -61,24 +61,26 @@ function getReservations(){
 }
 
 function loadReservation(items){
-    let myTable = document.getElementsByTagName("loadReservations")
-
     for(let i = 0; i < items.length; i++){
+        let myTable = document.getElementsByTagName("loadReservations")
 
-        myTable+="<tr>";
-        myTable+=`<tr data-id='${items[i].idReservation}'>`;
-        myTable+="<td>"+items[i].idReservation+"</td>";
-        myTable+="<td>"+items[i].cloud.name+"</td>";
-        myTable+="<td>"+items[i].client.idClient+"</td>";
-        myTable+="<td>"+items[i].client.name+"</td>";
-        myTable+="<td>"+items[i].client.email+"</td>";
-        myTable+= items[i].client.score == null ? "<td>No tiene calificación</td>" : "<td>"+items[i].client.score+"</td>";
-        myTable+="<td><button id='editReservation'>Editar</button><button id='deleteReservation'>Eliminar</button></td>";
-        myTable+="</tr>";
+        for(let i = 0; i < items.length; i++){
+
+            myTable+="<tr>";
+            myTable+=`<tr data-id='${items[i].idReservation}'>`;
+            myTable+="<td>"+items[i].idReservation+"</td>";
+            myTable+="<td>"+items[i].cloud.name+"</td>";
+            myTable+="<td>"+items[i].client.idClient+"</td>";
+            myTable+="<td>"+items[i].client.name+"</td>";
+            myTable+="<td>"+items[i].client.email+"</td>";
+            myTable+= items[i].client.score == null ? "<td>No tiene calificación</td>" : "<td>"+items[i].client.score+"</td>";
+            myTable+='<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="editReservation">Editar</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="deleteReservation">Eliminar</button></td>'
+            myTable+="</tr>";
+        }
+        myTable+="</tbody>";
+        $("#loadReservations").empty()
+        $("#loadReservations").append(myTable);
     }
-    myTable+="</tbody>";
-    $("#loadReservations").empty()
-    $("#loadReservations").append(myTable);
 }
 
 function editReservation(id) {
@@ -87,39 +89,29 @@ function editReservation(id) {
         type:   "GET",
         datatype:   "JSON",
         success:(response) => {
-            $("#idCloud").val(response.cloud.id)
-            $("#idClient").val(response.client.idClient)
-            document.getElementById("idCloud").disabled = true
-            document.getElementById("idClient").disabled = true
-            document.getElementById("status").disabled = false
-            document.getElementById("putReservation").disabled = false
-            document.getElementById("putReservation").dataset.id = id
-            document.getElementById("postReservation").disabled = true
+            $("#editIdReservation").val(response.idReservation)
+            $("#editIdCloud").val(response.cloud.name)
+            $("#editIdClient").val(response.client.name)
         }
     });
 }
 
 function putReservation() {
 
-    if(document.getElementById("startDate").value < document.getElementById("finishDate").value){
+    if(document.getElementById("editStartDate").value < document.getElementById("editFinishDate").value){
     $.ajax({
         url :  URL_RESERVATION + "update",
         type:   "PUT",
         data: JSON.stringify({
-            idReservation: document.getElementById("putReservation").dataset.id,
-            startDate: document.getElementById("startDate").value,
-            devolutionDate: document.getElementById("finishDate").value,
-            status: document.getElementById("status").value
+            idReservation: $("#editIdReservation").val(),
+            startDate: $("#editStartDate").val(),
+            devolutionDate: $("#editFinishDate").val(),
+            status: $("#editStatus").val()
         }),
         contentType:"application/JSON",
         success:() => {
             alert("Reserva actualizada")
             getReservations()
-            document.getElementById("idCloud").disabled = false
-            document.getElementById("idClient").disabled = false
-            document.getElementById("status").disabled = true
-            document.getElementById("putReservation").disabled = true
-            document.getElementById("postReservation").disabled = false
         }
     });       
     }else{

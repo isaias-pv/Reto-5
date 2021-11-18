@@ -5,6 +5,7 @@ import com.usa.reto.Report.ClientCounter;
 import com.usa.reto.Report.ReservationStatus;
 import com.usa.reto.Service.ServiceReservation;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +31,11 @@ public class ControllerReservation {
     @GetMapping("/all")
     public List<Reservation> getReservation(){
         return service.getAll();
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<Reservation> getReservation(@PathVariable("id") int id) {
+        return service.getReservation(id);
     }
     
     @PostMapping("/save")

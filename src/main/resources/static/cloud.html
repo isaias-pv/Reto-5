@@ -1,44 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Nubes</title>
-    <!-- JavaScript -->
-    <script type="module" src="js/cloud.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <!--  CSS Style-->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- JQuery -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Main Js -->
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/cloud.js"></script>
 </head>
-<body>
-    <header>
-        <h1>Nubes</h1>
-        <ul>
-            <li><a href="category.html">Ir a Categorias</a></li>
-            <li><a href="cloud.html">Ir a Nubes</a></li>
-            <li><a href="client.html">Ir a Clientes</a></li>
-            <li><a href="message.html">Ir a Mensajes</a></li>
-            <li><a href="reservation.html">Ir a Reservaciones</a></li>
-        </ul>
-    </header>
+<body class="text-center">
+  
+    <div class="signin unauthenticated">
+        <img class="mb-4 img" src="img/Cloud Computo.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Inicia sesion con GitHub</h1>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/oauth2/authorization/github">Iniciar Sesion <i class="fab fa-github"></i></a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 - 2022</p>
+    </div>      
 
-    <section>
-        <h2>Nubes</h2>
-        <div>
-            <div>
-                <h3>Agregar Nube</h3>
-                <input type="text" id="brand" placeholder="Brand" maxlength="45">
-                <input type="number" id="year" placeholder="Year" maxlength="4">
-                <select name="category" id="category"></select>
-                <input type="text" id="name" placeholder="Name" maxlength="45">
-                <input type="text" id="description" placeholder="Description" maxlength="250">
+    <div class="container authenticated" style="display:none">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="index.html">
+                        <img
+                            src="./img/Cloud Computo.png"
+                            height="35"
+                            alt=""
+                            loading="lazy"
+                        />
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="category.html">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="cloud.html">Nubes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="client.html">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="message.html">Mensajes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reservation.html">Reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Reportes</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+        
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- User -->
+                    <span>Usuario: <a href="" id="user"></a></span>
+                    <button type="button" class="btn btn-primary me-3" id="close-session">Cerrar Sesion</button>
+                </div>
+            <!-- Right elements -->
             </div>
-            <button id = "postCloud">Guardar!</button>
-            <button id = "putCloud" disabled>Editar!</button>
-        </div>
+        <!-- Container wrapper -->
+        </nav>
         <div>
-            <h3>Lista de Nubes</h3>
-            <button id = "getClouds"> Consultar</button> 
-            <table>
+            <h1>Nubes</h1>
+
+            <button type="button" class="btn btn-primary" id="getClouds">Obtener</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Añadir</button> 
+            
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <td>Modelo</td>
@@ -49,10 +99,129 @@
                         <td>Acciones</td>
                     </tr>
                 </thead>
-                <tbody id="loadClouds"></tbody>
+                <tbody id="loadClouds">
+                </tbody>
             </table>
         </div>
-        
-    </section>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                </a>
+                <span class="text-muted">&copy; 2021 - 2022, Cloud Computo INC</span>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!-- Modal Add -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Añadir Nube</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Marca</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="brand" placeholder="Marca 1" maxlength="45">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Año</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="year" placeholder="2000" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Categoria</label>
+                        <div class="col-sm-10">
+                            <select name="category" id="category" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Nombre Nube 1" maxlength="45">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" placeholder="Descripción Nube 1" maxlength="250">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="postCloud">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>            
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Editar Nube</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Id</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editIdCloud" placeholder="12" maxlength="45" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Marca</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editBrand" placeholder="Marca 1" maxlength="45">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Año</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="editYear" placeholder="2000" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Categoria</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editCategory" placeholder="" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editName" placeholder="Nombre Nube 1" maxlength="45">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editDescription" placeholder="Descripción Nube 1" maxlength="250">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="putCloud">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -48,28 +48,29 @@ function getClouds(){
 }
 
 function loadClouds(items){
-    let myTable = document.getElementsByTagName("laodClouds")
+    if(items.length != 0){
+        let myTable = document.getElementsByTagName("laodClouds")
+        for(let i = 0; i < items.length; i++){
 
-    for(let i = 0; i < items.length; i++){
-
-        myTable+="<tr>";
-        myTable+=`<tr data-id='${items[i].id}'>`;
-        myTable+="<td>"+items[i].brand+"</td>";
-        myTable+="<td>"+items[i].year+"</td>";
-        myTable+="<td>"+items[i].category.name+"</td>";
-        myTable+="<td>"+items[i].name+"</td>";
-        myTable+="<td>"+items[i].description+"</td>";
-        if(items[i].messages.length == 0 && items[i].reservations.length == 0){
-            myTable+="<td><button id='editCloud'>Editar</button><button id='deleteCloud'>Eliminar</button></td>";
-        }else{
-            myTable+="<td><button id='editCloud'>Editar</button></td>";
+            myTable+="<tr>";
+            myTable+=`<tr data-id='${items[i].id}'>`;
+            myTable+="<td>"+items[i].brand+"</td>";
+            myTable+="<td>"+items[i].year+"</td>";
+            myTable+="<td>"+items[i].category.name+"</td>";
+            myTable+="<td>"+items[i].name+"</td>";
+            myTable+="<td>"+items[i].description+"</td>";
+            if(items[i].messages.length == 0 && items[i].reservations.length == 0){
+                myTable+='<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="editCloud">Editar</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="deleteCloud">Eliminar</button></td>'
+            }else{
+                myTable+='<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="editCloud">Editar</button></td>';
+            }
+            
+            myTable+="</tr>";
         }
-        
-        myTable+="</tr>";
+        myTable+="</tbody>";
+        $("#loadClouds").empty()
+        $("#loadClouds").append(myTable);
     }
-    myTable+="</tbody>";
-    $("#loadClouds").empty()
-    $("#loadClouds").append(myTable);
 }
 
 
@@ -78,25 +79,16 @@ function putCloud(){
         url :  URL_CLOUD + "update",
         type:   "PUT",
         data: JSON.stringify({
-            id: document.getElementById("putCloud").dataset.id,
-            brand: $("#brand").val(),
-            year: $("#year").val(),
-            name: $("#name").val(),
-            category: {id: $("#category").val()},
-            description: $("#description").val()
+            id: $("#editIdCloud").val(),
+            brand: $("#editBrand").val(),
+            year: $("#editYear").val(),
+            name: $("#editName").val(),
+            description: $("#editDescription").val()
         }),
         contentType:"application/JSON",
         success:() => {
             alert("Nube actualizada")
             getClouds()
-            document.getElementById("category").disabled = false
-            document.getElementById("putCloud").disabled = true
-            document.getElementById("postCloud").disabled = false
-            $("#brand").val("")
-            $("#year").val("")
-            $("#name").val("")
-            $("#category").val("")
-            $("#description").val("")
         }
     });   
 }
@@ -123,15 +115,12 @@ function editCloud(id){
         type:   "GET",
         datatype:   "JSON",
         success:(response) => {
-            $("#brand").val(response.brand)
-            $("#year").val(response.year)
-            $("#name").val(response.name)
-            $("#category").val(response.category.id)
-            $("#description").val(response.description)
-            document.getElementById("category").disabled = true
-            document.getElementById("putCloud").disabled = false
-            document.getElementById("postCloud").disabled = true
-            document.getElementById("putCloud").dataset.id = id
+            $("#editBrand").val(response.brand)
+            $("#editYear").val(response.year)
+            $("#editName").val(response.name)
+            $("#editCategory").val(response.category.name)
+            $("#editDescription").val(response.description)
+            $("#editIdCloud").val(response.id)
         }
     });
 }

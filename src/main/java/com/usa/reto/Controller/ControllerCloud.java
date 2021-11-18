@@ -3,6 +3,7 @@ package com.usa.reto.Controller;
 import com.usa.reto.Model.Cloud;
 import com.usa.reto.Service.ServiceCloud;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +29,11 @@ public class ControllerCloud {
     @GetMapping("/all")
     public List<Cloud> getCloud(){
         return service.getAll();
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<Cloud> getCloudId(@PathVariable("id") int id){
+        return service.getCloud(id);
     }
     
     @PostMapping("/save")

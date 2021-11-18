@@ -3,6 +3,7 @@ package com.usa.reto.Controller;
 import com.usa.reto.Model.Client;
 import com.usa.reto.Service.ServiceClient;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +29,11 @@ public class ControllerClient {
     @GetMapping("/all")
     public List<Client> getClient(){
         return service.getAll();
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<Client> getCientId(@PathVariable("id") int id){
+        return service.getClient(id);
     }
     
     @PostMapping("/save")

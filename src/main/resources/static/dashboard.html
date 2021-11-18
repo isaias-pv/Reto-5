@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Panel de Reportes</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <!--  CSS Style-->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- JQuery -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Main Js -->
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/dashboard.js"></script>
+</head>
+<style>
+    body{
+        min-height: 1100px;
+    }
+</style>
+<body class="text-center">
+  
+    <div class="signin unauthenticated">
+        <img class="mb-4 img" src="img/Cloud Computo.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Inicia sesion con GitHub</h1>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/oauth2/authorization/github">Iniciar Sesion <i class="fab fa-github"></i></a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 - 2022</p>
+    </div>      
+
+    <div class="container authenticated" style="display:none">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                        <img
+                            src="./img/Cloud Computo.png"
+                            height="35"
+                            alt=""
+                            loading="lazy"
+                        />
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="category.html">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cloud.html">Nubes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="client.html">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="message.html">Mensajes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reservation.html">Reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">Reportes</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+        
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- User -->
+                    <span>Usuario: <a href="" id="user"></a></span>
+                    <button type="button" class="btn btn-primary me-3" id="close-session">Cerrar Sesion</button>
+                </div>
+            <!-- Right elements -->
+            </div>
+        <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="text-center"> 
+                              <h1 id="number-reservations">...</h1>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Cantidad de reservas <i class="fas fa-calendar-day"></i></p>
+                            <p class="card-title">Completadas - Canceladas<p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <hr>
+                      <div class="stats">
+                        <button type="button" class="btn btn-primary" id = "btn-reservations">Ver más detalles</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="text-center">
+                            <h1 id="number-range-time">...</h1>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Cantidad de reservas <i class="fas fa-calendar-day"></i></p>
+                            <p class="card-title">en un rango de tiempo<p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportDateModal">
+                            Ingresar fecha
+                          </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="icon-big text-center icon-warning">
+                            <h1 id="number-top-clients">...</h1>
+                            <br>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                              <p class="card-category">Cantidad de top clientes <i class="fas fa-user"></i></p>
+                              <br>                              
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                          <button type="button" class="btn btn-primary" id = "btn-top-clients">Ver más detalles</button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+              <br>
+            <div class="row">
+                <div class="col-6 col-md-12" id="table-one">
+                    <h4>Cantitad de reservas completadas y canceladas</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Completadas</th>
+                                <th scope="col">Canceladas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-one-body">
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="col-6 col-md-12" id="table-two">
+                    <h4>Top de clientes<p id="number"></p></h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Edad</th>
+                                <th scope="col">Lista de Reservas</th>
+                                <th scope="col">Cantidad de Mensajes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-two-body">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                </a>
+                <span class="text-muted">&copy; 2021 - 2022, Cloud Computo INC</span>
+            </div>
+        </footer>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="reportDateModal" tabindex="-1" role="dialog" aria-labelledby="reportDateModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportDateModal">Ingresar fecha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Fecha de inicio</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="startDate">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Fecha de devolución</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="finishDate">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-6 col-md-12" id="table-three">
+                        <h4>Cantidad de reservas en un tiempo determinado<p id="number-two"></p></h4>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Fecha de inicio</th>
+                                    <th scope="col">Fecha de devolución</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-three-body">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-report-date-AB">Ver información</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

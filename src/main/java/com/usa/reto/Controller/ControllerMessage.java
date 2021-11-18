@@ -3,6 +3,7 @@ package com.usa.reto.Controller;
 import com.usa.reto.Model.Message;
 import com.usa.reto.Service.ServiceMessage;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +29,11 @@ public class ControllerMessage {
     @GetMapping("/all")
     public List<Message> getMessage(){
         return service.getAll();
+    }
+    
+    @GetMapping("/{id}")
+    public Optional<Message> getMessageId(@PathVariable("id") int id){
+        return service.getMessage(id);
     }
     
     @PostMapping("/save")

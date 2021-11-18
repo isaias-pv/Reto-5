@@ -7,7 +7,7 @@ function postMessage(){
         data:   JSON.stringify({
             messageText: $("#messageText").val(),
             cloud: {id: $("#idCloud").val()},
-            client: {idClient: 1}
+            client: {idClient: $("#idClient").val()}
         }),
         contentType:"application/JSON",
         datatype: "JSON",
@@ -60,22 +60,22 @@ function getMessage(){
 }
 
 function loadMessage(items){
-    let myTable = document.getElementsByTagName("laodMessages")
-
-    for(let i = 0; i < items.length; i++){
-
-        myTable+="<tr>";
-        myTable+=`<tr data-id='${items[i].idMessage}'>`;
-        myTable+="<td>"+items[i].messageText+"</td>";
-        myTable+="<td>"+items[i].cloud.name+"</td>";
-        myTable+="<td>"+items[i].client.name+"</td>";
-        myTable+="<td><button id='editMessage'>Editar</button><button id='deleteMessage'>Eliminar</button></td>";
-        myTable+="</tr>";
-
+    if(items.length != 0){
+        let myTable = document.getElementsByTagName("laodMessages")
+        for(let i = 0; i < items.length; i++){
+                
+            myTable+="<tr>";
+            myTable+=`<tr data-id='${items[i].idMessage}'>`;
+            myTable+="<td>"+items[i].messageText+"</td>";
+            myTable+="<td>"+items[i].cloud.name+"</td>";
+            myTable+="<td>"+items[i].client.name+"</td>";
+            myTable+='<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="editMessage">Editar</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="deleteMessage">Eliminar</button></td>'
+            myTable+="</tr>";
+        }   
+            myTable+="</tbody>";
+            $("#loadMessages").empty()
+            $("#loadMessages").append(myTable);
     }
-    myTable+="</tbody>";
-    $("#loadMessages").empty()
-    $("#loadMessages").append(myTable);
 }
 
 function putMessage(){
@@ -83,19 +83,13 @@ function putMessage(){
         url :  URL_MESSAGE + "update",
         type:   "PUT",
         data: JSON.stringify({
-            idMessage: document.getElementById("putMessage").dataset.id,
-            messageText: $("#messageText").val()
+            idMessage: $("#editIdMessage").val(),
+            messageText: $("#editMessageText").val()
         }),
         contentType:"application/JSON",
         success:() => {
             alert("Mensaje actualizado")
             getMessage()
-            document.getElementById("idCloud").disabled = false
-            document.getElementById("idClient").disabled = false
-            document.getElementById("putMessage").disabled = true
-            document.getElementById("postMessage").disabled = false
-            $("#messageText").val("")
-            $("#idCloud").val("")
         }
     });   
 }
@@ -105,14 +99,10 @@ function editMessage(id){
         type:   "GET",
         datatype:   "JSON",
         success:(response) => {
-            $("#messageText").val(response.messageText)
-            $("#idCloud").val(response.cloud.id)
-            $("#idClient").val(response.client.idClient)
-            document.getElementById("idCloud").disabled = true
-            document.getElementById("idClient").disabled = true
-            document.getElementById("putMessage").disabled = false
-            document.getElementById("postMessage").disabled = true
-            document.getElementById("putMessage").dataset.id = id
+            $("#editIdMessage").val(response.idMessage)
+            $("#editMessageText").val(response.messageText)
+            $("#editIdCloud").val(response.cloud.name)
+            $("#editIdClient").val(response.client.name)
         }
     });
 }
