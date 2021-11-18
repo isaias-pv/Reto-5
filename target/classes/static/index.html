@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Inicio de Sesion</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <!--  CSS Style-->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- JQuery -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Main Js -->
+    <script type="module" src="./js/main.js"></script>
+</head>
+<body class="text-center">
+  
+    <div class="signin unauthenticated">
+        <img class="mb-4 img" src="img/Cloud Computo.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Inicia sesion con GitHub</h1>
+        <a class="btn btn-lg btn-primary btn-block" type="submit" href="/oauth2/authorization/github">Iniciar Sesion <i class="fab fa-github"></i></a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 - 2022</p>
+    </div>      
+
+    <div class="container authenticated" style="display:none">
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                        <img
+                            src="./img/Cloud Computo.png"
+                            height="35"
+                            alt=""
+                            loading="lazy"
+                        />
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="category.html">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cloud.html">Nubes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="client.html">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="message.html">Mensajes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reservation.html">Reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">Reportes</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+        
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- User -->
+                    <span>Usuario: <a href="" id="user"></a></span>
+                    <button type="button" class="btn btn-primary me-3" id="close-session">Cerrar Sesion</button>
+                </div>
+            <!-- Right elements -->
+            </div>
+        <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        <div class="container">
+            <div class="pt-3 row">
+
+                <div class="col-4">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header">Categorías</div>
+                            <div class="card-body">
+                                <a href="category.html" class="btn btn-secondary">Ir ahora</a>
+                            </div>
+                    </div>
+                </div>
+
+                    <div class="col-4">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-header">Nubes</div>
+                                <div class="card-body">
+                                    <a href="cloud.html" class="btn btn-primary">Ir ahora</a>
+                                </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-4">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-header">Clientes</div>
+                                <div class="card-body">
+                                        <a href="client.html" class="btn btn-success">Ir ahora</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="pt-3 row">
+                <div class="col-4">
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-header">Mensajes</div>
+                            <div class="card-body">
+                                <a href="message.html" class="btn btn-danger">Ir ahora</a>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card text-dark bg-warning mb-3">
+                        <div class="card-header">Reservas</div>
+                            <div class="card-body">
+                                <a href="reservation.html" class="btn btn-warning">Ir ahora</a>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card text-dark bg-info mb-3">
+                        <div class="card-header">Reportes</div>
+                            <div class="card-body">
+                                <a href="dashboard.html" class="btn btn-info">Ir ahora</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                </a>
+                <span class="text-muted">&copy; 2021 - 2022, Cloud Computo INC</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
